@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    VerdeMax — "Where Growth Takes Root."
+    Single-file, fast, responsive marketing page
+    Tech: Tailwind CDN only. No build step. Minimal JS for mobile nav.
+  -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerdeMax — Where Growth Takes Root</title>
+  <meta name="description" content="VerdeMax acquires, grows, and stewards Main Street service businesses with a long-term, tech-forward, values-driven approach." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%230a3' d='M128 8l96 40v72c0 74-55 112-96 128c-41-16-96-54-96-128V48z'/%3E%3Cpath fill='%23fff' d='M128 186c-12-38 1-73 30-100c-31 4-55 21-70 50c-4-26 5-49 26-70c-24 8-41 24-52 48c-3-30 6-55 28-76'/%3E%3C/svg%3E">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config: brand palette (green-gold-black)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            vm: { green: '#0a7a49', gold: '#c9a227', ink: '#0b0b0b', fog: '#f7f7f7' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Tiny enhancement for smoother anchors */
+    html { scroll-behavior: smooth; }
+  </style>
+  <!-- Open Graph -->
+  <meta property="og:title" content="VerdeMax — Where Growth Takes Root" />
+  <meta property="og:description" content="Boutique, tech-forward small-business acquisition & management for Main Street service companies." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verdemax.com" />
+  <!-- Simple JSON-LD for Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "VerdeMax",
+    "url": "https://verdemax.com",
+    "tagline": "Where Growth Takes Root.",
+    "logo": "https://verdemax.com/favicon.svg",
+    "description": "Boutique, tech-forward small-business acquisition & management for Main Street service companies.",
+    "sameAs": [
+      "https://www.linkedin.com/company/verdemax",
+      "https://x.com/verdemax"
+    ]
+  }
+  </script>
+</head>
+<body class="text-slate-800 bg-white antialiased">
+  <!-- ===== Sticky Header / Nav ===== -->
+  <header class="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <!-- Logo lockup (shield + sapling) -->
+      <a href="#top" class="flex items-center gap-2 group" aria-label="VerdeMax Home">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-vm-green text-white">
+          <!-- Minimal shield/sapling mark -->
+          <svg viewBox="0 0 256 256" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+            <path d="M128 8l96 40v72c0 74-55 112-96 128c-41-16-96-54-96-128V48z"></path>
+            <path fill="#fff" d="M128 186c-12-38 1-73 30-100c-31 4-55 21-70 50c-4-26 5-49 26-70c-24 8-41 24-52 48c-3-30 6-55 28-76"></path>
+          </svg>
+        </span>
+        <span class="font-semibold tracking-tight text-vm-ink group-hover:text-vm-green transition-colors">VerdeMax</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#about" class="hover:text-vm-green">About</a>
+        <a href="#approach" class="hover:text-vm-green">Approach</a>
+        <a href="#services" class="hover:text-vm-green">Services</a>
+        <a href="#why" class="hover:text-vm-green">Why VerdeMax</a>
+        <a href="#contact" class="hover:text-vm-green">Contact</a>
+        <a href="https://calendly.com/verdemax/intro" class="ml-2 inline-flex items-center rounded-lg bg-vm-green px-3 py-2 font-medium text-white hover:bg-emerald-700">Let’s Talk</a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-md border px-2.5 py-2 text-slate-700 hover:bg-slate-50" aria-expanded="false" aria-controls="mobileNav">
+        <span class="sr-only">Open menu</span>
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile Nav -->
+    <div id="mobileNav" class="md:hidden hidden border-t border-black/5">
+      <nav class="mx-auto max-w-6xl px-4 py-3 flex flex-col gap-3 text-sm">
+        <a href="#about" class="hover:text-vm-green">About</a>
+        <a href="#approach" class="hover:text-vm-green">Approach</a>
+        <a href="#services" class="hover:text-vm-green">Services</a>
+        <a href="#why" class="hover:text-vm-green">Why VerdeMax</a>
+        <a href="#contact" class="hover:text-vm-green">Contact</a>
+        <a href="https://calendly.com/verdemax/intro" class="inline-flex items-center justify-center rounded-lg bg-vm-green px-3 py-2 font-medium text-white hover:bg-emerald-700">Let’s Talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== Hero ===== -->
+    <section class="relative overflow-hidden">
+      <div class="mx-auto max-w-6xl px-4 py-20 md:py-28">
+        <div class="grid items-center gap-10 md:grid-cols-2">
+          <div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-vm-ink">
+              Boutique Operators for Main Street: <span class="text-vm-green">Acquire • Transition • Grow</span>
+            </h1>
+            <p class="mt-4 text-base md:text-lg text-slate-700">
+              VerdeMax acquires, grows, and stewards essential service businesses—HVAC, plumbing, pool care, health & wellness, and more—with a long-term, tech-forward, values-driven approach.
+            </p>
+            <p class="mt-2 text-slate-600 italic">“Where Growth Takes Root.” 🌱</p>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a href="https://calendly.com/verdemax/intro" class="inline-flex items-center justify-center rounded-lg bg-vm-green px-5 py-3 text-white font-medium hover:bg-emerald-700">Let’s Talk</a>
+              <a href="mailto:hello@verdemax.com" class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-3 font-medium hover:bg-slate-50">Sell Your Business</a>
+            </div>
+
+            <!-- Trust bullets -->
+            <ul class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm text-slate-600">
+              <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-vm-gold"></span>Values-driven</li>
+              <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-vm-gold"></span>AI-enabled</li>
+              <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-vm-gold"></span>Community-first</li>
+            </ul>
+          </div>
+
+          <!-- Simple visual card -->
+          <div class="relative">
+            <div class="rounded-2xl border border-black/5 bg-gradient-to-br from-vm-fog to-white p-6 shadow-sm">
+              <h3 class="font-semibold text-slate-800">What We Do</h3>
+              <p class="mt-2 text-sm text-slate-600">
+                We provide fair exits and smooth successions for owners, bring modern systems and AI-powered efficiency, and build durable growth with loyal teams and excellent service.
+              </p>
+              <div class="mt-4 grid grid-cols-3 gap-3 text-xs">
+                <div class="rounded-lg border p-3">
+                  <div class="font-semibold text-vm-ink">HVAC</div>
+                  <div class="text-slate-600">Residential & light commercial</div>
+                </div>
+                <div class="rounded-lg border p-3">
+                  <div class="font-semibold text-vm-ink">Plumbing</div>
+                  <div class="text-slate-600">Trusted local operators</div>
+                </div>
+                <div class="rounded-lg border p-3">
+                  <div class="font-semibold text-vm-ink">Wellness</div>
+                  <div class="text-slate-600">Community health services</div>
+                </div>
+              </div>
+              <a href="#approach" class="mt-4 inline-block text-sm font-medium text-vm-green hover:underline">See our approach →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About / Founder ===== -->
+    <section id="about" class="bg-vm-fog border-y border-black/5">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="grid gap-8 md:grid-cols-3">
+          <div class="md:col-span-2">
+            <h2 class="text-2xl md:text-3xl font-bold text-vm-ink">About VerdeMax</h2>
+            <p class="mt-3 text-slate-700">
+              We’re a boutique, tech-forward holding company focused on Main Street. Headquartered in the U.S. with global savvy, we acquire and operate essential service businesses with a long-term perspective—prioritizing people, legacy, and community impact.
+            </p>
+            <p class="mt-3 text-slate-700">
+              Our philosophy is simple: pair modern systems and AI-enabled operations with loyal teams and excellent customer service to compound value over decades—not quarters.
+            </p>
+          </div>
+          <div>
+            <div class="rounded-xl border border-black/5 p-5 bg-white">
+              <h3 class="font-semibold text-slate-800">Founder: Nick Austin</h3>
+              <p class="mt-2 text-sm text-slate-600">
+                Blend of enterprise SaaS experience and entrepreneurial operating focus. Track record across $MM transactions over 10+ years and a growing real estate portfolio—now dedicated to building resilient local service businesses.
+              </p>
+              <a href="https://calendly.com/verdemax/intro" class="mt-3 inline-flex rounded-md bg-vm-green px-3 py-2 text-white text-sm font-medium hover:bg-emerald-700">Connect with Nick</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Approach (3-step process) ===== -->
+    <section id="approach">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-vm-ink">Our Approach</h2>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3">
+          <div class="rounded-xl border border-black/5 p-5">
+            <div class="text-sm uppercase tracking-wide text-vm-green font-semibold">1. Acquire</div>
+            <p class="mt-2 text-slate-700 text-sm">
+              Fair valuations and respectful diligence. We leverage AI-driven sourcing to find great businesses and structure win-win deals.
+            </p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <div class="text-sm uppercase tracking-wide text-vm-green font-semibold">2. Transition</div>
+            <p class="mt-2 text-slate-700 text-sm">
+              Owner-led handoff and employee-first integration. We preserve culture and customer relationships while modernizing systems.
+            </p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <div class="text-sm uppercase tracking-wide text-vm-green font-semibold">3. Grow</div>
+            <p class="mt-2 text-slate-700 text-sm">
+              Scalable playbooks, smart technology, and relentless service—driving sustainable, compounding growth for the long term.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Services / Features (3 points) ===== -->
+    <section id="services" class="bg-white">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-vm-ink">What We Offer</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">Acquisition & Transition</h3>
+            <p class="mt-2 text-sm text-slate-700">Fair exits and smooth succession for owners ready for their next chapter.</p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">Operational Excellence</h3>
+            <p class="mt-2 text-sm text-slate-700">Modern systems, AI-powered efficiency, and hands-on leadership.</p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">Sustainable Growth</h3>
+            <p class="mt-2 text-sm text-slate-700">People-first culture, superior service, and scalable playbooks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Why VerdeMax / Differentiators ===== -->
+    <section id="why" class="bg-vm-fog border-y border-black/5">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-vm-ink">Why VerdeMax</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">Cross-Border Vision</h3>
+            <p class="mt-2 text-sm text-slate-700">U.S.-based with global perspective—resilient, diversified operations.</p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">AI-Driven Sourcing</h3>
+            <p class="mt-2 text-sm text-slate-700">Automation accelerates deal flow, diligence, and value creation.</p>
+          </div>
+          <div class="rounded-xl border border-black/5 p-5">
+            <h3 class="font-semibold text-vm-ink">Values-Driven</h3>
+            <p class="mt-2 text-sm text-slate-700">We protect legacy, invest in people, and serve communities first.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact / CTA ===== -->
+    <section id="contact">
+      <div class="mx-auto max-w-6xl px-4 py-16">
+        <div class="rounded-2xl border border-black/5 p-6 md:p-8">
+          <div class="grid gap-6 md:grid-cols-2">
+            <div>
+              <h2 class="text-2xl md:text-3xl font-bold text-vm-ink">Ready to talk?</h2>
+              <p class="mt-3 text-slate-700">
+                Owners, lenders, and investors—let’s explore a fit. We typically respond within one business day.
+              </p>
+              <div class="mt-5 flex flex-col sm:flex-row gap-3">
+                <a href="https://calendly.com/verdemax/intro" class="inline-flex items-center justify-center rounded-lg bg-vm-green px-5 py-3 text-white font-medium hover:bg-emerald-700">Book a Call</a>
+                <a href="mailto:hello@verdemax.com" class="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-3 font-medium hover:bg-slate-50">hello@verdemax.com</a>
+              </div>
+              <p class="mt-3 text-xs text-slate-500">Prefer email? Include your location, business type, and timeline.</p>
+            </div>
+            <!-- Simple, no-backend contact "form" approach for static hosting -->
+            <div class="bg-vm-fog/60 rounded-xl p-5 border border-black/5">
+              <h3 class="font-semibold text-slate-800">What to expect</h3>
+              <ul class="mt-2 text-sm text-slate-700 list-disc pl-5 space-y-1">
+                <li>No-pressure introduction call (15–30 min)</li>
+                <li>High-level fit check & succession goals</li>
+                <li>Optional NDA and data room follow-up</li>
+              </ul>
+              <a href="mailto:hello@verdemax.com?subject=Intro%20Call%20Request&body=Company%20Name%3A%0ALocation%3A%0AService%20Type%3A%0ARevenue%2FEmployees%3A%0ATimeline%3A%0A"
+                 class="mt-4 inline-block text-sm font-medium text-vm-green hover:underline">Email with prefilled details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="bg-black text-white">
+    <div class="mx-auto max-w-6xl px-4 py-10">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+        <div>
+          <div class="font-semibold">VerdeMax</div>
+          <div class="text-sm text-white/70">Boutique small-business acquisition & management.</div>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+          <!-- Social placeholders -->
+          <a href="https://www.linkedin.com/company/verdemax" class="hover:underline">LinkedIn</a>
+          <a href="https://x.com/verdemax" class="hover:underline">X</a>
+          <a href="mailto:hello@verdemax.com" class="hover:underline">Email</a>
+        </div>
+      </div>
+      <div class="mt-6 text-xs text-white/60">© <span id="year"></span> VerdeMax. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- ===== Minimal JS (menu toggle + year) ===== -->
+  <script>
+    const y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+    const btn = document.getElementById('menuBtn');
+    const nav = document.getElementById('mobileNav');
+    if (btn && nav) {
+      btn.addEventListener('click', () => {
+        const open = !nav.classList.contains('hidden');
+        nav.classList.toggle('hidden');
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+  </script>
+</body>
+</html>
