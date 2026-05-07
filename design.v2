@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VerdeMax — A long-term home for Texas service businesses</title>
+  <meta name="description" content="VerdeMax acquires and operates cash-flowing service businesses in Texas. A serious buyer with capital in place — fair deals, smooth transitions." />
+  <meta property="og:title" content="VerdeMax — A long-term home for Texas service businesses" />
+  <meta property="og:description" content="VerdeMax acquires and operates cash-flowing service businesses in Texas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://verdemax.com" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f3a2e'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='18' fill='%23eee7d6'%3EV%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="image-slot.js"></script>
+
+  <style>
+    :root {
+      /* Defaults — overridden by JS based on tweaks */
+      --paper: #f4f0e6;
+      --paper-2: #ebe5d4;
+      --ink: #181614;
+      --ink-2: #3a3631;
+      --ink-3: #6b655c;
+      --rule: #d8d1bd;
+      --rule-2: #c2b99f;
+      --accent: #2b3d2f;       /* deep forest */
+      --accent-ink: #f4f0e6;
+      --gold: #8a6d2a;
+
+      --serif: "Newsreader", "Source Serif 4", Georgia, serif;
+      --sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --measure-narrow: 36rem;
+      --gutter: clamp(20px, 4vw, 56px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "ss01", "cv11";
+    }
+
+    /* Subtle paper grain */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+      opacity: .55;
+      z-index: 1;
+    }
+    main, header, footer { position: relative; z-index: 2; }
+
+    .wrap { max-width: 1240px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+    .wrap-narrow { max-width: 880px; margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+
+    .serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.011em; }
+    .mono { font-family: var(--mono); font-feature-settings: "tnum"; }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .eyebrow .dot {
+      display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); margin-right: 10px; vertical-align: middle;
+      transform: translateY(-1px);
+    }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; }
+    h1 { line-height: 1.02; }
+    h2 { line-height: 1.05; }
+
+    .rule { height: 1px; background: var(--rule); border: 0; }
+    .rule-strong { height: 1px; background: var(--rule-2); border: 0; }
+
+    a { color: inherit; text-decoration: none; }
+    .link-u { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+    .link-u:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* Header */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in srgb, var(--paper) 85%, transparent);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 18px; padding-bottom: 18px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 28px; height: 28px; border-radius: 4px;
+      background: var(--accent); color: var(--accent-ink);
+      display: grid; place-items: center;
+      font-family: var(--serif); font-size: 17px; font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .brand-name {
+      font-family: var(--serif); font-size: 20px; font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .brand-name em { font-style: normal; color: var(--ink-3); font-weight: 400; }
+
+    .nav-links { display: flex; align-items: center; gap: 24px; white-space: nowrap; }
+    .nav-links a {
+      font-size: 13px; color: var(--ink-2);
+      transition: color .2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--sans); font-size: 13px; font-weight: 500;
+      padding: 9px 16px; border-radius: 999px;
+      background: var(--accent); color: var(--accent-ink);
+      transition: opacity .2s; white-space: nowrap;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    @media (max-width: 1080px) {
+      .nav-links { gap: 18px; }
+      .nav-links a:not(.nav-cta) { font-size: 12.5px; }
+    }
+    @media (max-width: 940px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+
+    /* Hero */
+    .hero { padding-top: clamp(80px, 14vh, 160px); padding-bottom: clamp(80px, 12vh, 140px); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 56px;
+      align-items: end;
+    }
+    @media (min-width: 980px) {
+      .hero-grid { grid-template-columns: 1.4fr 1fr; gap: 72px; align-items: end; }
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 7.4vw, 108px);
+      line-height: 0.96;
+      letter-spacing: -0.025em;
+      margin: 28px 0 0;
+      max-width: 12ch;
+      font-weight: 300;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero-sub {
+      margin-top: 36px; max-width: 50ch;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.55; color: var(--ink-2);
+    }
+    .hero-meta {
+      margin-top: 44px;
+      display: flex; flex-wrap: wrap; gap: 28px;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .hero-meta b { color: var(--ink); font-weight: 500; }
+
+    .hero-side {
+      border-left: 1px solid var(--rule);
+      padding-left: 28px;
+      padding-bottom: 8px;
+    }
+    @media (max-width: 979px) {
+      .hero-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 32px; }
+    }
+    .hero-side .label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); }
+    .hero-side .stat {
+      font-family: var(--serif); font-size: clamp(28px, 3vw, 38px);
+      line-height: 1.05; margin: 6px 0 18px;
+      letter-spacing: -0.02em;
+    }
+    .hero-side .stat-num { color: var(--accent); }
+    .hero-side .stat-detail { font-size: 13px; color: var(--ink-2); line-height: 1.5; max-width: 32ch; }
+    .hero-side hr { margin: 22px 0; }
+
+    /* Marquee strip — Texas + capital */
+    .strip {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      background: color-mix(in srgb, var(--paper-2) 50%, var(--paper));
+      overflow: hidden;
+    }
+    .strip-inner {
+      display: flex; align-items: center; gap: 56px;
+      padding: 18px 0; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .strip-inner > span { display: inline-flex; align-items: center; gap: 12px; }
+    .strip-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rule-2); }
+
+    /* Section heads */
+    section { scroll-margin-top: 80px; }
+    .sec { padding: clamp(80px, 11vh, 140px) 0; }
+    .sec-alt { background: color-mix(in srgb, var(--paper-2) 60%, var(--paper)); }
+    .sec-head {
+      display: grid; grid-template-columns: 1fr; gap: 8px;
+      margin-bottom: 56px;
+    }
+    @media (min-width: 900px) {
+      .sec-head { grid-template-columns: 220px 1fr; gap: 64px; align-items: baseline; }
+    }
+    .sec-head h2 {
+      font-size: clamp(32px, 4.6vw, 56px); line-height: 1.04;
+      max-width: 22ch; font-weight: 300;
+    }
+    .sec-num {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-3); padding-top: 14px;
+    }
+
+    /* Philosophy / about */
+    .lede {
+      font-family: var(--serif); font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.35; max-width: 32ch; color: var(--ink);
+      letter-spacing: -0.012em; font-weight: 300;
+    }
+    .lede em { color: var(--accent); font-style: italic; }
+    .body-cols {
+      margin-top: 64px;
+      display: grid; gap: 56px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 880px) {
+      .body-cols { grid-template-columns: 1fr 1fr; gap: 72px; }
+    }
+    .body-cols p { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 1em; }
+    .principle {
+      display: grid; gap: 12px;
+      grid-template-columns: 28px 1fr;
+      align-items: baseline;
+      padding: 22px 0;
+      border-top: 1px solid var(--rule);
+    }
+    .principle:last-child { border-bottom: 1px solid var(--rule); }
+    .principle-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; }
+    .principle-body h4 { margin: 0 0 6px; font-family: var(--serif); font-size: 19px; font-weight: 500; letter-spacing: -0.01em; }
+    .principle-body p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); }
+
+    /* What we buy */
+    .criteria {
+      display: grid; gap: 0;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--rule-2);
+    }
+    .criteria-row {
+      display: grid; gap: 18px 32px;
+      grid-template-columns: 1fr;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--rule);
+      align-items: baseline;
+    }
+    @media (min-width: 760px) {
+      .criteria-row { grid-template-columns: 220px 1fr 1fr; }
+    }
+    .criteria-row .k {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .criteria-row .v {
+      font-family: var(--serif); font-size: clamp(22px, 2vw, 28px);
+      line-height: 1.2; letter-spacing: -0.01em;
+    }
+    .criteria-row .v small {
+      display: block; font-family: var(--sans); font-size: 13.5px;
+      color: var(--ink-2); margin-top: 4px; letter-spacing: 0; line-height: 1.5;
+    }
+
+    .industries {
+      margin-top: 80px;
+      display: grid; gap: 1px;
+      background: var(--rule);
+      grid-template-columns: repeat(2, 1fr);
+      border: 1px solid var(--rule);
+    }
+    @media (min-width: 760px) { .industries { grid-template-columns: repeat(4, 1fr); } }
+    .industry {
+      background: var(--paper);
+      padding: 28px 22px 26px;
+      display: flex; flex-direction: column; gap: 10px;
+      min-height: 200px;
+    }
+    .industry .glyph {
+      width: 38px; height: 38px;
+      display: grid; place-items: center;
+      color: var(--accent);
+    }
+    .industry h4 {
+      margin: 4px 0 0; font-family: var(--serif); font-size: 19px;
+      font-weight: 500; letter-spacing: -0.01em;
+    }
+    .industry p { margin: 0; font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+    .industry .recurring {
+      margin-top: auto;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
+    }
+
+    /* Founder section — editorial */
+    .founder {
+      display: grid; gap: 56px;
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    @media (min-width: 980px) {
+      .founder { grid-template-columns: 5fr 6fr; gap: 80px; }
+    }
+    .founder-portrait {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--paper-2);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .founder-portrait image-slot { width: 100%; height: 100%; --image-slot-fit: cover; --image-slot-position: top center; }
+    .founder-portrait image-slot img,
+    .founder-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .founder-caption {
+      margin-top: 14px; display: flex; justify-content: space-between;
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .founder-note h3 {
+      font-size: clamp(28px, 3.4vw, 42px); line-height: 1.1;
+      letter-spacing: -0.02em; margin: 0 0 32px; font-weight: 300;
+      max-width: 22ch;
+    }
+    .founder-note h3 em { color: var(--accent); font-style: italic; }
+    .founder-note p {
+      font-family: var(--serif); font-size: 18px; line-height: 1.6;
+      color: var(--ink); max-width: 56ch; margin: 0 0 1.1em;
+      font-weight: 300;
+    }
+    .signature {
+      margin-top: 32px; display: flex; align-items: center; gap: 18px;
+      padding-top: 22px; border-top: 1px solid var(--rule);
+    }
+    .signature-script {
+      font-family: "Fraunces", serif; font-style: italic; font-weight: 300;
+      font-size: 32px; letter-spacing: -0.01em; color: var(--accent);
+      transform: rotate(-3deg) translateY(-2px); transform-origin: left;
+    }
+    .signature-meta { font-size: 13px; color: var(--ink-2); line-height: 1.45; }
+    .signature-meta b { color: var(--ink); font-weight: 500; }
+
+    /* Process */
+    .process {
+      display: grid; gap: 0;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--rule-2);
+      counter-reset: step;
+    }
+    .step {
+      display: grid; gap: 24px 40px;
+      grid-template-columns: 1fr;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    @media (min-width: 880px) {
+      .step { grid-template-columns: 120px 200px 1fr 220px; align-items: baseline; }
+    }
+    .step-num {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .step h4 {
+      font-family: var(--serif); font-size: clamp(22px, 2.2vw, 28px);
+      margin: 0; letter-spacing: -0.012em; line-height: 1.2; font-weight: 400;
+    }
+    .step p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-2); max-width: 48ch; }
+    .step-time {
+      font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+      letter-spacing: 0.04em;
+    }
+    .step-time b { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; display: block; }
+
+    /* Why VerdeMax */
+    .why-grid {
+      display: grid; gap: 1px; background: var(--rule);
+      grid-template-columns: 1fr;
+      border: 1px solid var(--rule);
+    }
+    @media (min-width: 760px) { .why-grid { grid-template-columns: repeat(3, 1fr); } }
+    .why-cell {
+      background: var(--paper); padding: 36px 32px 40px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .why-cell .num {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .why-cell h4 {
+      margin: 0; font-family: var(--serif); font-size: clamp(22px, 2vw, 26px);
+      line-height: 1.15; letter-spacing: -0.01em; font-weight: 500; max-width: 18ch;
+    }
+    .why-cell p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+    .why-cell .pill {
+      margin-top: auto; display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); padding-top: 10px;
+    }
+
+    /* Credibility / advisors */
+    .creds {
+      display: grid; gap: 32px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 880px) { .creds { grid-template-columns: 1fr 1fr 1fr; } }
+    .cred {
+      border: 1px solid var(--rule);
+      padding: 26px 26px 28px;
+      background: var(--paper);
+    }
+    .cred .k {
+      font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 12px;
+    }
+    .cred .v {
+      font-family: var(--serif); font-size: 22px; line-height: 1.2;
+      letter-spacing: -0.01em; margin-bottom: 14px; font-weight: 400;
+    }
+    .cred .placeholder {
+      display: grid; gap: 6px; font-size: 13px; color: var(--ink-2);
+    }
+    .cred .placeholder .ph-row {
+      padding: 8px 10px; border: 1px dashed var(--rule-2);
+      background: color-mix(in srgb, var(--paper-2) 50%, var(--paper));
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+      color: var(--ink-3);
+    }
+
+    /* FAQ */
+    .faq { display: grid; gap: 0; border-top: 1px solid var(--rule-2); }
+    .faq-item {
+      border-bottom: 1px solid var(--rule);
+      padding: 26px 0;
+      display: grid; gap: 14px 40px;
+      grid-template-columns: 1fr;
+      cursor: pointer;
+    }
+    @media (min-width: 760px) {
+      .faq-item { grid-template-columns: 28px 1fr 28px; align-items: baseline; }
+    }
+    .faq-q {
+      font-family: var(--serif); font-size: clamp(19px, 1.7vw, 22px);
+      line-height: 1.3; letter-spacing: -0.01em; margin: 0; font-weight: 400;
+    }
+    .faq-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: 0.1em; }
+    .faq-toggle {
+      width: 22px; height: 22px; border: 1px solid var(--rule-2); border-radius: 50%;
+      display: grid; place-items: center; color: var(--ink-2);
+      transition: transform .25s ease, background .2s, color .2s;
+      justify-self: end;
+      font-family: var(--mono); font-size: 14px;
+    }
+    .faq-item[open] .faq-toggle { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); transform: rotate(45deg); }
+    .faq-a {
+      grid-column: 1 / -1;
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s ease, margin .25s, opacity .25s;
+      opacity: 0;
+    }
+    @media (min-width: 760px) { .faq-a { grid-column: 2 / 3; } }
+    .faq-item[open] .faq-a { max-height: 600px; margin-top: 14px; opacity: 1; }
+    .faq-a p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--ink-2); max-width: 64ch; }
+
+    /* Contact */
+    .contact-card {
+      border: 1px solid var(--rule-2);
+      padding: clamp(36px, 5vw, 64px);
+      background: var(--paper);
+      display: grid; gap: 48px;
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 880px) { .contact-card { grid-template-columns: 1.2fr 1fr; gap: 80px; } }
+    .contact-card h2 {
+      font-size: clamp(34px, 4vw, 52px); line-height: 1.05;
+      margin: 0 0 24px; letter-spacing: -0.02em; font-weight: 300; max-width: 14ch;
+    }
+    .contact-card p { font-size: 16px; line-height: 1.6; color: var(--ink-2); max-width: 50ch; }
+    .contact-actions { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px; border-radius: 999px;
+      font-size: 14px; font-weight: 500;
+      border: 1px solid transparent; transition: all .2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); }
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--ink); border-color: var(--rule-2); }
+    .btn-ghost:hover { border-color: var(--ink); }
+    .btn .arr { font-family: var(--mono); }
+
+    .contact-side h4 {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-3); margin: 0 0 16px;
+    }
+    .contact-side ul { list-style: none; margin: 0; padding: 0; }
+    .contact-side li {
+      padding: 14px 0; border-top: 1px solid var(--rule);
+      display: grid; grid-template-columns: 22px 1fr; gap: 14px; align-items: baseline;
+      font-size: 14.5px; line-height: 1.5; color: var(--ink-2);
+    }
+    .contact-side li:last-child { border-bottom: 1px solid var(--rule); }
+    .contact-side li .check {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+    }
+
+    /* Footer */
+    footer {
+      background: #161410; color: #cbc4b0;
+      padding: 80px 0 36px;
+      margin-top: 0;
+    }
+    footer .wrap { display: grid; gap: 56px; grid-template-columns: 1fr; }
+    @media (min-width: 880px) {
+      footer .wrap { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+    }
+    footer h5 {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #8a8472; margin: 0 0 18px; font-weight: 500;
+    }
+    footer .tag {
+      font-family: var(--serif); font-size: 30px; line-height: 1.1;
+      color: #efe9d6; max-width: 22ch; margin: 0 0 32px;
+      font-weight: 300; letter-spacing: -0.015em;
+    }
+    footer .tag em { color: #c5b384; font-style: italic; }
+    footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; }
+    footer ul a:hover { color: #fff; }
+    .foot-bottom {
+      margin-top: 64px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      color: #8a8472;
+    }
+
+    /* Tweaks marker */
+    [data-tweaks-mount] { font-family: var(--sans); }
+  </style>
+</head>
+<body>
+
+<header class="nav" data-screen-label="Header">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="VerdeMax home">
+      <span class="brand-mark">V</span>
+      <span class="brand-name">VerdeMax<em>.</em></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#criteria">What we buy</a>
+      <a href="#founder">Founder</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://calendar.app.google/axcdtUJMkTb2YbQn8" target="_blank" rel="noopener" class="nav-cta">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" data-screen-label="Hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>A Texas holding company · Est. 2025</div>
+          <h1 class="serif">A long-term home<br/>for the businesses<br/>you <em>spent a life</em><br/>building.</h1>
+          <p class="hero-sub">
+            VerdeMax acquires and operates essential service businesses across Texas — pool routes, plumbing, pest control, HVAC. We&rsquo;re a single, serious buyer with capital in place and no plans to flip what we buy.
+          </p>
+          <div class="hero-meta">
+            <span><b>Houston</b> &amp; Dallas</span>
+            <span>SDE <b>$500K – $800K</b></span>
+            <span>Hold horizon: <b>indefinite</b></span>
+          </div>
+        </div>
+
+        <aside class="hero-side">
+          <div class="label">At a glance</div>
+          <div class="stat"><span class="stat-num">$1.4 – 2.2M</span></div>
+          <div class="stat-detail">Target purchase price for a single-business acquisition. Open to asset or stock deals; SBA-ready, and we welcome a seller note — when you stay partly invested through the handoff, everyone&rsquo;s rowing in the same direction.</div>
+          <hr class="rule" />
+          <div class="label">Active in</div>
+          <div class="stat" style="font-size: 22px; line-height: 1.2;">Pool · Pest · Plumbing<br/>HVAC · Fire &amp; safety</div>
+          <div class="stat-detail">Recurring-revenue, owner-operated, established staff. We come to you ready to talk specifics.</div>
+          <hr class="rule" />
+          <a href="https://calendar.app.google/axcdtUJMkTb2YbQn8" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top: 6px;">Book an intro call <span class="arr">→</span></a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="strip" aria-label="Buyer credentials">
+    <div class="wrap">
+      <div class="strip-inner">
+        <span><span class="strip-dot"></span>Capital committed</span>
+        <span><span class="strip-dot"></span>SBA pre-qualified</span>
+        <span><span class="strip-dot"></span>Texas-based</span>
+        <span><span class="strip-dot"></span>One operator. One owner.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy" class="sec" data-screen-label="Philosophy">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">01 — Philosophy</div>
+        <h2 class="serif">We&rsquo;re not building a portfolio. We&rsquo;re building a <em style="color: var(--accent);">home</em> for the kind of businesses that quietly run Texas.</h2>
+      </div>
+
+      <div class="body-cols">
+        <div>
+          <p class="lede">A pool route in Sugar Land. A plumbing company in Frisco. The unglamorous work that keeps a city working — and the families who built those businesses over twenty or thirty years.</p>
+          <p style="margin-top: 28px;">When an owner is ready for the next chapter, the typical options aren&rsquo;t great: a strategic buyer who folds the company in and lays off half the staff; a private-equity rollup that levers everything up and resells in three years; a relative who can&rsquo;t quite take the reins.</p>
+          <p>VerdeMax exists to be the fourth option. One serious buyer, capital ready, with the patience to keep what works, the operating discipline to invest where it matters, and zero intention of selling the business onward.</p>
+        </div>
+
+        <div>
+          <div class="principle">
+            <span class="principle-num">i.</span>
+            <div class="principle-body">
+              <h4>Own forever, not three years.</h4>
+              <p>We don&rsquo;t buy with an exit horizon. The businesses we acquire stay under VerdeMax indefinitely, which changes how we make every other decision.</p>
+            </div>
+          </div>
+          <div class="principle">
+            <span class="principle-num">ii.</span>
+            <div class="principle-body">
+              <h4>Keep what works.</h4>
+              <p>Tenured staff stay. Customer relationships stay. Brand stays. We&rsquo;re buying these businesses because they work — gutting them would be self-defeating.</p>
+            </div>
+          </div>
+          <div class="principle">
+            <span class="principle-num">iii.</span>
+            <div class="principle-body">
+              <h4>Invest where it matters.</h4>
+              <p>Better dispatch software, more vehicles, real marketing, a clean back office. The boring upgrades that owner-operators rarely have time to make.</p>
+            </div>
+          </div>
+          <div class="principle">
+            <span class="principle-num">iv.</span>
+            <div class="principle-body">
+              <h4>Honor the handoff.</h4>
+              <p>Selling a business is personal. We move at your pace, sign mutual NDAs before any financials change hands, and treat the LOI as a real commitment — not an opening anchor we plan to chip at later.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE BUY -->
+  <section id="criteria" class="sec sec-alt" data-screen-label="Criteria">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">02 — What we buy</div>
+        <h2 class="serif">Specific. Not opportunistic.</h2>
+      </div>
+
+      <div class="criteria">
+        <div class="criteria-row">
+          <div class="k">Purchase price</div>
+          <div class="v">$1.4M &ndash; $2.2M<small>Single-business acquisition. Add-ons considered after the platform is in place.</small></div>
+          <div class="v" style="font-size: 17px; font-family: var(--sans); color: var(--ink-2); line-height: 1.5; letter-spacing: 0;">
+            Within the range that SBA 7(a) financing supports cleanly, plus equity from VerdeMax. We are not stretching to buy bigger than we can run.
+          </div>
+        </div>
+        <div class="criteria-row">
+          <div class="k">Cash flow (SDE)</div>
+          <div class="v">$500K &ndash; $800K<small>Trailing twelve months, owner-adjusted earnings.</small></div>
+          <div class="v" style="font-size: 17px; font-family: var(--sans); color: var(--ink-2); line-height: 1.5; letter-spacing: 0;">
+            Stable or growing. Concentration above 25% in one customer needs a reason. Add-back gymnastics make us walk.
+          </div>
+        </div>
+        <div class="criteria-row">
+          <div class="k">Geography</div>
+          <div class="v">Texas — Houston &amp; Dallas metros<small>Including surrounding counties: Harris, Fort Bend, Montgomery, Collin, Denton, Tarrant.</small></div>
+          <div class="v" style="font-size: 17px; font-family: var(--sans); color: var(--ink-2); line-height: 1.5; letter-spacing: 0;">
+            Local on purpose. We place a full-time general manager on site who lives in the metro and runs the business from the ground — not from a spreadsheet two time zones away.
+          </div>
+        </div>
+        <div class="criteria-row">
+          <div class="k">Structure</div>
+          <div class="v">Asset or stock; SBA-led<small>Pre-qualified with multiple SBA lenders. Equity is committed, not contingent.</small></div>
+          <div class="v" style="font-size: 17px; font-family: var(--sans); color: var(--ink-2); line-height: 1.5; letter-spacing: 0;">
+            We welcome a seller note. When you keep some skin in the game alongside us, it tells the staff and customers you still believe in the business — and it aligns us during the first year, when alignment matters most. Earnouts work the same way.
+          </div>
+        </div>
+        <div class="criteria-row">
+          <div class="k">Seller transition</div>
+          <div class="v">3 – 12 months, your pace<small>Anywhere from a clean handoff to a multi-year consulting role.</small></div>
+          <div class="v" style="font-size: 17px; font-family: var(--sans); color: var(--ink-2); line-height: 1.5; letter-spacing: 0;">
+            Some sellers want to be done at close. Others want to stay involved for a year. Both are fine — we plan transition around what you need.
+          </div>
+        </div>
+      </div>
+
+      <!-- Industry grid with placeholder visuals -->
+      <div class="industries" aria-label="Industries">
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="6" y="14" width="28" height="18" rx="1.5"/>
+              <path d="M6 22 Q 11 18, 16 22 T 26 22 T 36 22" stroke-width="1.4"/>
+              <path d="M6 27 Q 11 23, 16 27 T 26 27 T 36 27" stroke-width="1.4" opacity="0.5"/>
+              <circle cx="20" cy="9" r="2.5"/>
+            </svg>
+          </div>
+          <h4>Pool service</h4>
+          <p>Residential and commercial maintenance routes with weekly recurring billing.</p>
+          <span class="recurring">Recurring</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M8 10 h24 v6 h-9 v8 a4 4 0 0 1 -4 4 h-2 a4 4 0 0 1 -4 -4 v-8 h-5 z"/>
+              <path d="M14 28 v4" />
+              <path d="M22 28 v4" />
+              <circle cx="14" cy="34" r="1.2" fill="currentColor"/>
+              <circle cx="22" cy="34" r="1.2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Plumbing</h4>
+          <p>Service-call and contract plumbing with established commercial accounts.</p>
+          <span class="recurring">Mixed</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="7" y="9" width="26" height="22" rx="2"/>
+              <path d="M7 16 h26"/>
+              <circle cx="13" cy="23" r="3"/>
+              <circle cx="20" cy="23" r="3"/>
+              <circle cx="27" cy="23" r="3"/>
+            </svg>
+          </div>
+          <h4>HVAC</h4>
+          <p>Service contracts, replacement and maintenance — favoring contracted recurring work.</p>
+          <span class="recurring">Recurring</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M20 6 c-4 6-8 9-8 14 a8 8 0 0 0 16 0 c0-5-4-8-8-14z"/>
+              <path d="M20 18 c-2 3-4 4-4 7 a4 4 0 0 0 8 0 c0-3-2-4-4-7z" stroke-width="1"/>
+            </svg>
+          </div>
+          <h4>Pest control</h4>
+          <p>Quarterly residential routes, commercial accounts, lawn and tree adjacencies.</p>
+          <span class="recurring">Recurring</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="13" y="6" width="14" height="22" rx="1.5"/>
+              <rect x="16" y="9" width="8" height="3" />
+              <path d="M20 14 v8"/>
+              <path d="M16 28 v4 h8 v-4"/>
+              <path d="M11 32 h18"/>
+            </svg>
+          </div>
+          <h4>Fire &amp; safety</h4>
+          <p>Inspection routes — extinguishers, sprinklers, alarms — heavily recurring by code.</p>
+          <span class="recurring">Recurring</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <rect x="4" y="18" width="32" height="10" rx="2"/>
+              <circle cx="11" cy="30" r="2.5"/>
+              <circle cx="29" cy="30" r="2.5"/>
+              <path d="M9 18 L13 12 H27 L31 18"/>
+              <path d="M16 23 h8" />
+            </svg>
+          </div>
+          <h4>Lot sweeping</h4>
+          <p>Commercial parking-lot sweeping under monthly contract with retail and industrial.</p>
+          <span class="recurring">Recurring</span>
+        </div>
+        <div class="industry">
+          <div class="glyph">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <circle cx="20" cy="20" r="13"/>
+              <path d="M20 7 v26 M7 20 h26"/>
+              <path d="M11 11 l18 18 M11 29 l18 -18" opacity="0.5"/>
+            </svg>
+          </div>
+          <h4>Adjacent services</h4>
+          <p>Other route-based commercial services with recurring revenue and an installed base.</p>
+          <span class="recurring">Open</span>
+        </div>
+        <div class="industry" style="background: var(--accent); color: var(--accent-ink);">
+          <div class="glyph" style="color: var(--accent-ink); opacity: 0.7;">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2">
+              <path d="M10 30 L20 10 L30 30 z"/>
+              <path d="M20 16 v8" />
+              <circle cx="20" cy="27" r="0.8" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4 style="color: var(--accent-ink);">Not on this list?</h4>
+          <p style="color: rgba(244,240,230,0.8);">Recurring-revenue commercial services we haven&rsquo;t named — we&rsquo;ll still take the call.</p>
+          <a href="https://calendar.app.google/axcdtUJMkTb2YbQn8" target="_blank" rel="noopener" class="recurring" style="color: var(--accent-ink); border-bottom: 1px solid currentColor; align-self: flex-start; padding-bottom: 2px;">Reach out →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section id="founder" class="sec" data-screen-label="Founder">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">03 — The buyer</div>
+        <h2 class="serif">A note from the founder.</h2>
+      </div>
+
+      <div class="founder">
+        <div>
+          <div class="founder-portrait">
+            <image-slot id="founder-portrait" src="assets/nicholas-austin-portrait.jpg" placeholder="Drag in a hands-in-pockets or arms-crossed portrait — full body works at this 3:4 ratio" shape="rect"></image-slot>
+          </div>
+          <div class="founder-caption">
+            <span>Nicholas Austin</span>
+            <span>Houston, TX</span>
+          </div>
+        </div>
+
+        <div class="founder-note">
+          <h3>I'm <em>one person</em>, with capital, looking to buy <em>one good business</em> at a time.</h3>
+
+          <p>Most of the calls a Texas service-business owner gets these days are from private-equity rollups: someone in New York or Chicago who&rsquo;s never been to your shop and has every intention of selling it onward in three years.</p>
+
+          <p>VerdeMax is the opposite of that. I&rsquo;m a single buyer, investing my own hard-earned capital, with an SBA letter of support and a real lending partner already lined up. I&rsquo;m looking to acquire one cash-flowing service business at a time and operate it for the long haul.</p>
+
+          <p>Before this, I spent a decade in enterprise B2B sales — closing six- and seven-figure software deals — which mostly taught me that great deals get done when both sides walk in honest and stay that way. I&rsquo;m bringing that same posture here.</p>
+
+          <p>If you&rsquo;re thinking about selling, even years out, I&rsquo;d like to know you. I&rsquo;ll sign an NDA before you tell me a single number. I&rsquo;ll tell you fast if it&rsquo;s not a fit. And if it is a fit, you&rsquo;ll find I&rsquo;m straightforward to deal with.</p>
+
+          <div class="signature">
+            <div class="signature-meta">
+              <b>Nicholas Austin</b><br/>
+              Founder, VerdeMax · <a href="https://www.linkedin.com/in/nicholasmaustin" target="_blank" rel="noopener" class="link-u">LinkedIn</a> · <a href="mailto:nick@verdemax.com" class="link-u">nick@verdemax.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="sec sec-alt" data-screen-label="Process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">04 — Process</div>
+        <h2 class="serif">From first call to closing — typically 90 to 120 days.</h2>
+      </div>
+
+      <div class="process">
+        <div class="step">
+          <div class="step-num">Step 01</div>
+          <h4>Introduction</h4>
+          <p>A 30-minute call. You tell me about the business, what you&rsquo;d want a transition to look like, and what your timeline is. No financials yet, no pressure.</p>
+          <div class="step-time"><b>Day 0</b>30 minutes</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 02</div>
+          <h4>Mutual NDA</h4>
+          <p>Standard mutual NDA before we look at anything sensitive. You see how I work and I see whether the numbers support a real conversation.</p>
+          <div class="step-time"><b>Day 1 – 7</b>One business week</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 03</div>
+          <h4>Indication of interest</h4>
+          <p>If the business looks like a fit, you&rsquo;ll get a written indication of interest with a price range and broad terms. Honest range, not a high anchor.</p>
+          <div class="step-time"><b>Day 7 – 14</b>One to two weeks</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 04</div>
+          <h4>Letter of intent</h4>
+          <p>If we agree on the IOI, we move to a binding LOI with exclusivity. We treat the LOI as a commitment: the number on it is the number we expect to close at. If diligence surfaces something material that changes the picture, we&rsquo;ll have an honest conversation about it — but we don&rsquo;t use diligence as a tool to chip the price down for sport.</p>
+          <div class="step-time"><b>Day 14 – 21</b>Roughly week three</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 05</div>
+          <h4>Diligence &amp; financing</h4>
+          <p>Quality of earnings, legal review, and SBA lender underwriting in parallel. We work with <a href="https://visocap.net/" target="_blank" rel="noopener" class="link-u">Viso Capital</a> — an SBA broker who shops the deal across their lender network — which keeps the financing track moving on its own timeline rather than gating everything else.</p>
+          <div class="step-time"><b>Day 21 – 100</b>Ten to twelve weeks</div>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 06</div>
+          <h4>Close &amp; transition</h4>
+          <p>Funds wire, papers sign, the keys come over. Whatever transition support you committed to begins on Day 1, on the schedule we agreed in the LOI.</p>
+          <div class="step-time"><b>Day 100 – 120</b>Closing window</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY VERDEMAX -->
+  <section id="why" class="sec" data-screen-label="Why VerdeMax">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">05 — Why VerdeMax</div>
+        <h2 class="serif">What you can expect that you&rsquo;re not getting from the other calls.</h2>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-cell">
+          <span class="num">i.</span>
+          <h4>Capital that&rsquo;s actually committed</h4>
+          <p>Equity is in place. SBA pre-qualified with multiple lenders. We&rsquo;re not raising the down-payment after we agree to a price.</p>
+          <span class="pill">→ no financing contingencies after LOI</span>
+        </div>
+        <div class="why-cell">
+          <span class="num">ii.</span>
+          <h4>A buyer, not a fund</h4>
+          <p>VerdeMax is one operator with one mandate — buy and run. No investment committee that gets cold feet, no LP timeline forcing a flip in three years.</p>
+          <span class="pill">→ permanent home for the business</span>
+        </div>
+        <div class="why-cell">
+          <span class="num">iii.</span>
+          <h4>An LOI you can plan around</h4>
+          <p>Diligence is for understanding the business — not for negotiating the price down a second time. If something material surfaces, we talk it through in the open. Otherwise the LOI number is the closing number.</p>
+          <span class="pill">→ no diligence-driven chipping</span>
+        </div>
+      </div>
+
+      <!-- Credibility row -->
+      <div style="margin-top: 80px;">
+        <div class="eyebrow" style="margin-bottom: 22px;"><span class="dot"></span>Capital &amp; advisors</div>
+        <div class="creds">
+          <div class="cred">
+            <div class="k">Equity capital</div>
+            <div class="v">Founder equity. Personal financials reviewed and validated by an SBA underwriting specialist.</div>
+            <div class="placeholder">
+              <div class="ph-row"><a href="assets/Viso-Letter-of-Support-Nicholas-Austin.pdf" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor;">→ Read the Viso letter of support (PDF)</a></div>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="k">SBA broker</div>
+            <div class="v"><a href="https://visocap.net/" target="_blank" rel="noopener" class="link-u">Viso Business Capital</a> — Heather Endresen, Owner.</div>
+          </div>
+          <div class="cred">
+            <div class="k">Training &amp; advisors</div>
+            <div class="v">Trained through Buy Then Build, the Contrarian Thinking community, and Acquisitions Anonymous. Counsel and QofE engaged ahead of LOI.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="sec sec-alt" data-screen-label="FAQ">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-num">06 — FAQ</div>
+        <h2 class="serif">Questions sellers actually ask.</h2>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">01</span>
+            <h4 class="faq-q">What happens to my employees?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>The team comes with the business. We&rsquo;re buying because what your people built works — replacing them would defeat the point. Tenured staff keep their roles, comp, and seniority. We honor existing benefits and only make changes where staff actively want them.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">02</span>
+            <h4 class="faq-q">Will you keep the company name?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>Yes — by default. Brand equity built over decades is real, especially in service businesses where customers chose your name for a reason. VerdeMax is a holding company, not a brand we paste on top of acquired companies.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">03</span>
+            <h4 class="faq-q">Do I have to stay involved after closing?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>Only as much as you want. Some sellers leave at close; some stay on a one-year consulting agreement; some take an ongoing advisory role. We plan the transition around what you want, not the other way around.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">04</span>
+            <h4 class="faq-q">How do I know you&rsquo;ll actually close?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>Equity is committed up front. We&rsquo;re pre-qualified with multiple SBA 7(a) lenders. We can introduce you to our counsel and lender contacts before LOI so you&rsquo;re not taking our word for any of it. The honest test is: ask for those references early.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">05</span>
+            <h4 class="faq-q">Will you load the business with debt and resell it?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>No. The acquisition is financed with SBA debt at the holding-company level and committed equity — not the kind of leverage that strangles operations. We don&rsquo;t plan resales. The base case is to own and operate this business indefinitely.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">06</span>
+            <h4 class="faq-q">What if I&rsquo;m two or three years away from selling?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>Talk anyway. Most sellers get the best outcome by starting the conversation early — it lets us understand the business at our own pace and lets you sell on your timeline rather than under pressure. There&rsquo;s no obligation in talking.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary style="display: contents; cursor: pointer; list-style: none;">
+            <span class="faq-num">07</span>
+            <h4 class="faq-q">Are you working with a broker or going direct?</h4>
+            <span class="faq-toggle">+</span>
+          </summary>
+          <div class="faq-a"><p>Both. We pay broker fees per industry standard and have good working relationships with several Texas-based M&amp;A advisors. Direct conversations are equally welcome — and often the most efficient when there&rsquo;s a real fit.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="sec" data-screen-label="Contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 22px;"><span class="dot"></span>Get in touch</div>
+          <h2 class="serif">Even if it&rsquo;s years out — let&rsquo;s start the conversation.</h2>
+          <p>Whether you&rsquo;re ready to sell now or just figuring out what your options look like, reach out. I read every email and respond within one business day.</p>
+          <div class="contact-actions">
+            <a href="https://calendar.app.google/axcdtUJMkTb2YbQn8" target="_blank" rel="noopener" class="btn btn-primary">Book a 30-min intro <span class="arr">→</span></a>
+            <a href="mailto:nick@verdemax.com" class="btn btn-ghost">Email Nicholas directly</a>
+          </div>
+          <p style="margin-top: 28px; font-size: 13.5px; color: var(--ink-3);">If you&rsquo;re emailing, including your location, service type and rough revenue range helps me come back with something useful instead of a templated reply.</p>
+        </div>
+        <div class="contact-side">
+          <h4>What to expect</h4>
+          <ul>
+            <li><span class="check">01</span><span>30-minute intro call. No financials shared.</span></li>
+            <li><span class="check">02</span><span>Mutual NDA before any numbers change hands.</span></li>
+            <li><span class="check">03</span><span>Honest fit assessment within a week.</span></li>
+            <li><span class="check">04</span><span>Written IOI with a real price range.</span></li>
+            <li><span class="check">05</span><span>LOI inside three weeks if it&rsquo;s a fit.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand" style="margin-bottom: 24px;">
+        <span class="brand-mark" style="background: #efe9d6; color: #161410;">V</span>
+        <span class="brand-name" style="color: #efe9d6;">VerdeMax<em style="color: #8a8472;">.</em></span>
+      </div>
+      <div class="tag">Where growth <em>takes root.</em></div>
+      <div style="font-size: 13.5px; color: #8a8472; max-width: 38ch; line-height: 1.55;">
+        VerdeMax is a Texas-based holding company acquiring and operating cash-flowing service businesses for the long term.
+      </div>
+    </div>
+
+    <div>
+      <h5>Site</h5>
+      <ul>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#criteria">What we buy</a></li>
+        <li><a href="#founder">Founder</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:nick@verdemax.com">nick@verdemax.com</a></li>
+        <li><a href="https://www.linkedin.com/in/nicholasmaustin" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://calendar.app.google/axcdtUJMkTb2YbQn8" target="_blank" rel="noopener">Book a call</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Office</h5>
+      <ul>
+        <li>Houston, Texas</li>
+        <li>Active across DFW &amp; HOU metros</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> VerdeMax Holdings, LLC.</span>
+      <span>All rights reserved · Texas, USA</span>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-mount"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" data-presets="env,react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "palette": "forest-cream",
+  "type": "newsreader-inter",
+  "density": "regular",
+  "showGrain": true
+}/*EDITMODE-END*/;
+
+const PALETTES = {
+  "forest-cream": {
+    label: "Forest / Cream",
+    "--paper": "#f4f0e6",
+    "--paper-2": "#ebe5d4",
+    "--ink": "#181614",
+    "--ink-2": "#3a3631",
+    "--ink-3": "#6b655c",
+    "--rule": "#d8d1bd",
+    "--rule-2": "#c2b99f",
+    "--accent": "#2b3d2f",
+    "--accent-ink": "#f4f0e6",
+    "--gold": "#8a6d2a"
+  },
+  "muted-forest": {
+    label: "Muted Forest / Bone",
+    "--paper": "#f6f4ee",
+    "--paper-2": "#ece8dc",
+    "--ink": "#1a1a18",
+    "--ink-2": "#3d3d39",
+    "--ink-3": "#71706a",
+    "--rule": "#dcd9cc",
+    "--rule-2": "#c4c0ad",
+    "--accent": "#3a4a3e",
+    "--accent-ink": "#f6f4ee",
+    "--gold": "#7d6738"
+  },
+  "terracotta": {
+    label: "Sage / Terracotta",
+    "--paper": "#f6f1e8",
+    "--paper-2": "#ede5d3",
+    "--ink": "#231d17",
+    "--ink-2": "#43382c",
+    "--ink-3": "#776a59",
+    "--rule": "#dccfb6",
+    "--rule-2": "#c5b394",
+    "--accent": "#8d4a2b",
+    "--accent-ink": "#f6f1e8",
+    "--gold": "#a26a2c"
+  },
+  "monochrome": {
+    label: "Near-Monochrome",
+    "--paper": "#f5f3ee",
+    "--paper-2": "#e9e6dd",
+    "--ink": "#0e0e0c",
+    "--ink-2": "#2c2c28",
+    "--ink-3": "#6c6b66",
+    "--rule": "#d4d2c9",
+    "--rule-2": "#b8b5a8",
+    "--accent": "#1a1a17",
+    "--accent-ink": "#f5f3ee",
+    "--gold": "#5e5949"
+  }
+};
+
+const TYPES = {
+  "newsreader-inter": {
+    label: "Newsreader + Inter Tight",
+    "--serif": '"Newsreader", "Source Serif 4", Georgia, serif',
+    "--sans": '"Inter Tight", ui-sans-serif, system-ui, sans-serif'
+  },
+  "source-inter": {
+    label: "Source Serif + Inter Tight",
+    "--serif": '"Source Serif 4", "Newsreader", Georgia, serif',
+    "--sans": '"Inter Tight", ui-sans-serif, system-ui, sans-serif'
+  },
+  "fraunces-inter": {
+    label: "Fraunces + Inter Tight",
+    "--serif": '"Fraunces", "Newsreader", Georgia, serif',
+    "--sans": '"Inter Tight", ui-sans-serif, system-ui, sans-serif'
+  },
+  "all-sans": {
+    label: "All Sans (Arising-style)",
+    "--serif": '"Inter Tight", ui-sans-serif, system-ui, sans-serif',
+    "--sans": '"Inter Tight", ui-sans-serif, system-ui, sans-serif'
+  }
+};
+
+function applyTokens(t) {
+  const root = document.documentElement;
+  const pal = PALETTES[t.palette] || PALETTES["forest-cream"];
+  const typ = TYPES[t.type] || TYPES["newsreader-inter"];
+  Object.entries(pal).forEach(([k, v]) => { if (k.startsWith('--')) root.style.setProperty(k, v); });
+  Object.entries(typ).forEach(([k, v]) => { if (k.startsWith('--')) root.style.setProperty(k, v); });
+
+  // Density
+  if (t.density === "compact") {
+    root.style.setProperty('--gutter', 'clamp(16px, 3vw, 36px)');
+  } else if (t.density === "comfy") {
+    root.style.setProperty('--gutter', 'clamp(24px, 5vw, 72px)');
+  } else {
+    root.style.setProperty('--gutter', 'clamp(20px, 4vw, 56px)');
+  }
+
+  // Grain
+  document.body.style.setProperty('--grain-opacity', t.showGrain ? '0.55' : '0');
+  if (!t.showGrain) {
+    if (!document.getElementById('__grain_off')) {
+      const s = document.createElement('style');
+      s.id = '__grain_off';
+      s.textContent = 'body::before{display:none!important}';
+      document.head.appendChild(s);
+    }
+  } else {
+    const s = document.getElementById('__grain_off');
+    if (s) s.remove();
+  }
+}
+
+function App() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(() => { applyTokens(t); }, [t]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Palette" />
+      <TweakSelect
+        label="Color"
+        value={t.palette}
+        options={Object.entries(PALETTES).map(([k, v]) => ({ value: k, label: v.label }))}
+        onChange={(v) => setTweak('palette', v)}
+      />
+      <TweakSection label="Typography" />
+      <TweakSelect
+        label="Pairing"
+        value={t.type}
+        options={Object.entries(TYPES).map(([k, v]) => ({ value: k, label: v.label }))}
+        onChange={(v) => setTweak('type', v)}
+      />
+      <TweakSection label="Layout" />
+      <TweakRadio
+        label="Density"
+        value={t.density}
+        options={['compact','regular','comfy']}
+        onChange={(v) => setTweak('density', v)}
+      />
+      <TweakToggle
+        label="Paper grain"
+        value={t.showGrain}
+        onChange={(v) => setTweak('showGrain', v)}
+      />
+    </TweaksPanel>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('tweaks-mount'));
+root.render(<App />);
+
+// Apply tokens on first paint too (before tweaks panel is activated)
+applyTokens(TWEAK_DEFAULTS);
+</script>
+
+<script>
+  // Year
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+
+  // FAQ — animate height
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    item.addEventListener('toggle', () => {
+      // native <details> handles open/close; our CSS animates on [open]
+    });
+  });
+</script>
+
+</body>
+</html>
